@@ -1,4 +1,4 @@
-name: Terraform RDS Aurora
+name: Terraform RDS MYSQL
 
 on:
   push:
