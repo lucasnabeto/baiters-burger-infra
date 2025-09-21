@@ -1,25 +1,17 @@
-name: Terraform EKS
+name: Terraform
 
 on:
-  workflow_run:
-    workflows: ["Terraform Validate"]
-    types:
-      - completed
+  push:
+    branches:
+      - develop
 
 jobs:
-  eks:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  terraform:
     runs-on: ubuntu-latest
-
-    env:
-      AWS_REGION: us-east-1
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -29,11 +21,20 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Terraform Init
-        run: terraform -chdir=infra/eks init
+        run: terraform -chdir=infra init
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
 
       - name: Terraform Plan
-        run: terraform -chdir=infra/eks plan -no-color
+        run: terraform plan -no-color
 
       - name: Terraform Apply
-        run: terraform -chdir=infra/eks apply -auto-approve
+        run: terraform apply -auto-approve
