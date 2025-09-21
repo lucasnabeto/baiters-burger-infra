@@ -1,6 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "my-terraform-state-bucket"
+    bucket = "my-baiters-state-bucket-aurora"
+    key    = "terraform/state.tfstate"
     region = "us-east-1"
   }
   required_providers {
