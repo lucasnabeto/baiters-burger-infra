@@ -7,15 +7,15 @@
 #}
 
 module "eks" {
-  source            = "./eks"
-  cluster_name      = "baitersburger-cluster"
-  k8s_version       = "1.28"
+  source             = "./eks"
+  cluster_name       = "baitersburger-cluster"
+  k8s_version        = "1.28"
   node_instance_type = "t2.medium"
-  desired_capacity  = 1
-  min_size          = 1
-  max_size          = 2
-  role_name         = "LabRole"
-  region            = "us-east-1"
+  desired_capacity   = 1
+  min_size           = 1
+  max_size           = 2
+  role_name          = "LabRole"
+  region             = "us-east-1"
 }
 
 #module "lambda" {
