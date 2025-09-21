@@ -21,8 +21,8 @@ module "eks" {
 module "lambda" {
   source = "./lambda"
 
-  language_runtime  = "python3.13"
-  handler_method = "ndex.lambda_handler"
+  language_runtime = "python3.13"
+  handler_method   = "index.lambda_handler"
 }
 
 module "rds" {
