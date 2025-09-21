@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "my-baiters-state-bucket-aurora"
+    bucket = "my-baiters-state-bucket-eks"
     key    = "terraform/state.tfstate"
     region = "us-east-1"
   }

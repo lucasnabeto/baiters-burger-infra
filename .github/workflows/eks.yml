@@ -1,4 +1,4 @@
-name: Terraform RDS
+name: Terraform EKS
 
 on:
   workflow_run:
@@ -7,7 +7,7 @@ on:
       - completed
 
 jobs:
-  rds:
+  eks:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
@@ -29,10 +29,10 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terraform Init
-        run: terraform -chdir=infra/rds init
+        run: terraform -chdir=infra/eks init
 
       - name: Terraform Plan
-        run: terraform -chdir=infra/rds plan -no-color
+        run: terraform -chdir=infra/eks plan -no-color
 
       - name: Terraform Apply
-        run: terraform -chdir=infra/rds apply -auto-approve
+        run: terraform -chdir=infra/eks apply -auto-approve
