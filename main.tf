@@ -2,12 +2,15 @@
 #  source = "./api-gateway"
 #}
 
-#module "cognito" {
-#  source = "./cognito"
-#}
+module "cognito" {
+ source = "./cognito"
+
+ default_password = "Cognito@123"
+}
 
 module "eks" {
   source             = "./eks"
+
   cluster_name       = "baitersburger-cluster"
   k8s_version        = "1.28"
   node_instance_type = "t2.medium"
