@@ -12,5 +12,6 @@ resource "aws_secretsmanager_secret_version" "rds_credentials_version" {
   secret_string = jsonencode({
     username = "admin"
     password = random_password.rds.result
+    db_name  = "baitersburger"
   })
 }

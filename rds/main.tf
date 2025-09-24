@@ -35,7 +35,7 @@ resource "aws_db_instance" "mysql" {
   publicly_accessible     = true
   skip_final_snapshot     = true
   iam_database_authentication_enabled = true
-  # Optionally, attach IAM role
-  # depends_on = [data.aws_iam_role.role_for_rds]
+  db_name                 = local.rds_secret.db_name
+
 }
 
