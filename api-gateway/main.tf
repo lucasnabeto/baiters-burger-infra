@@ -22,5 +22,5 @@ data "aws_security_groups" "sg" {
 }
 
 data "" "vpc_id" {
-  
+
 }

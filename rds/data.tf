@@ -10,6 +10,6 @@ data "aws_subnets" "nets" {
 }
 
 
-data "aws_secretsmanager_secret_version" "rds_credentials" {
-  secret_id = aws_secretsmanager_secret.rds_credentials.id
-}
+# data "aws_secretsmanager_secret_version" "rds_credentials" {
+#   secret_id = aws_secretsmanager_secret.rds_credentials.id
+# }
