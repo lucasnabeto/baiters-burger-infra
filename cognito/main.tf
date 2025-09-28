@@ -24,3 +24,37 @@ resource "aws_cognito_user" "user" {
 
   password = var.default_password
 }
+
+resource "aws_cognito_resource_server" "resource_server" {
+  name         = "BaitersBurgerAPI"
+  identifier   = "baitersburger"
+  user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
+
+  scope {
+    scope_name        = "api.read"
+    scope_description = "Permissão para ler"
+  }
+
+  scope {
+    scope_name        = "api.write"
+    scope_description = "Permissão para criar"
+  }
+}
+
+resource "aws_cognito_user_pool_client" "machine_client" {
+  name         = "BaitersBurgerAppClient"
+  user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
+
+  generate_secret                      = true
+  allowed_oauth_flows_user_pool_client = true
+  allowed_oauth_flows                  = ["client_credentials"]
+  allowed_oauth_scopes = [
+    "${aws_cognito_resource_server.resource_server.identifier}/api.read",
+    "${aws_cognito_resource_server.resource_server.identifier}/api.write",
+  ]
+}
+
+resource "aws_cognito_user_pool_domain" "domain" {
+  domain       = var.cognito_domain_prefix
+  user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
+}

@@ -6,6 +6,7 @@ module "cognito" {
  source = "./cognito"
 
  default_password = "Cognito@123"
+ cognito_domain_prefix = "baitersburger-app"
 }
 
 module "eks" {
