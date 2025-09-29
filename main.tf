@@ -22,12 +22,12 @@ module "eks" {
   region             = "us-east-1"
 }
 
-module "lambda" {
-  source = "./lambda"
+# module "lambda" {
+#   source = "./lambda"
 
-  language_runtime = "python3.13"
-  handler_method   = "index.lambda_handler"
-}
+#   language_runtime = "python3.13"
+#   handler_method   = "index.lambda_handler"
+# }
 
 module "rds" {
   source = "./rds"
