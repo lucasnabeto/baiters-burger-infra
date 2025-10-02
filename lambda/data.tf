@@ -4,10 +4,10 @@ data "aws_iam_role" "lab_role" {
 
 data "aws_s3_object" "lambda_authorizer_code" {
   bucket = "baiters-burger-infra"
-  key    = "lambda_authorizer.zip"
+  key    = "lambdas/lambda_authorizer.zip"
 }
 
 data "aws_s3_object" "lambda_user_password_code" {
   bucket = "baiters-burger-infra"
-  key    = "lambda_user_password.zip"
+  key    = "lambdas/lambda_user_password.zip"
 }
