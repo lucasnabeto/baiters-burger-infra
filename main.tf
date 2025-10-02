@@ -21,9 +21,10 @@ module "lambda" {
   source     = "./lambda"
   depends_on = [module.cognito]
 
-  cognito_user_pool_id      = module.cognito.cognito_user_pool_id
-  cognito_machine_client_id = module.cognito.cognito_machine_client_id
-  cognito_login_client_id   = module.cognito.cognito_login_client_id
+  cognito_user_pool_id        = module.cognito.cognito_user_pool_id
+  cognito_machine_client_id   = module.cognito.cognito_machine_client_id
+  cognito_login_client_id     = module.cognito.cognito_login_client_id
+  cognito_login_client_secret = module.cognito.cognito_login_client_secret
 }
 
 module "rds" {

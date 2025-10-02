@@ -35,6 +35,7 @@ resource "aws_lambda_function" "baiters_lambda_user_password" {
     variables = {
       COGNITO_USER_POOL_ID  = var.cognito_user_pool_id
       COGNITO_APP_CLIENT_ID = var.cognito_login_client_id
+      COGNITO_APP_CLIENT_SECRET = var.cognito_login_client_secret
       COGNITO_REGION        = "us-east-1"
     }
   }
