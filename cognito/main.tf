@@ -12,14 +12,8 @@ resource "aws_cognito_user_pool" "user_pool_configuration" {
   }
 }
 
-resource "aws_cognito_user_pool_client" "client" {
-  name            = "ClienteTeste"
-  user_pool_id    = aws_cognito_user_pool.user_pool_configuration.id
-  generate_secret = false
-}
-
-resource "aws_cognito_user" "user" {
-  username     = "77521398076"
+resource "aws_cognito_user" "admin_user" {
+  username     = "admin"
   user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
 
   password = var.default_password
@@ -32,12 +26,12 @@ resource "aws_cognito_resource_server" "resource_server" {
 
   scope {
     scope_name        = "api.read"
-    scope_description = "Permissão para ler"
+    scope_description = "Permission to read"
   }
 
   scope {
     scope_name        = "api.write"
-    scope_description = "Permissão para criar"
+    scope_description = "Permission to write"
   }
 }
 
