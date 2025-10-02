@@ -1,11 +1,16 @@
 output "cognito_user_pool_id" {
   description = "User pool ID"
-  value = aws_cognito_user_pool.user_pool_configuration.id
+  value       = aws_cognito_user_pool.user_pool_configuration.id
 }
 
-output "cognito_client_id" {
-  description = "Client ID"
+output "cognito_machine_client_id" {
+  description = "Machine client ID"
   value       = aws_cognito_user_pool_client.machine_client.id
+}
+
+output "cognito_login_client_id" {
+  description = "Login client ID"
+  value       = aws_cognito_user_pool_client.login_client.id
 }
 
 output "cognito_token_endpoint" {

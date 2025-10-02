@@ -36,7 +36,7 @@ resource "aws_cognito_resource_server" "resource_server" {
 }
 
 resource "aws_cognito_user_pool_client" "machine_client" {
-  name         = "BaitersBurgerAppClient"
+  name         = "BaitersBurgerMachineClient"
   user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
 
   generate_secret                      = true
@@ -46,6 +46,20 @@ resource "aws_cognito_user_pool_client" "machine_client" {
     "${aws_cognito_resource_server.resource_server.identifier}/api.read",
     "${aws_cognito_resource_server.resource_server.identifier}/api.write",
   ]
+}
+
+resource "aws_cognito_user_pool_client" "login_client" {
+  name         = "BaitersBurgerLoginClient"
+  user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
+
+  allowed_oauth_flows_user_pool_client = true
+  allowed_oauth_flows                  = ["code", "implicit"]
+  allowed_oauth_scopes = [
+    "${aws_cognito_resource_server.resource_server.identifier}/api.read",
+    "${aws_cognito_resource_server.resource_server.identifier}/api.write",
+  ]
+  explicit_auth_flows          = ["ALLOW_ADMIN_USER_PASSWORD_AUTH"]
+  supported_identity_providers = ["COGNITO"]
 }
 
 resource "aws_cognito_user_pool_domain" "domain" {

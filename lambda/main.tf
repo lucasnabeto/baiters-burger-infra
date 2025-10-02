@@ -8,6 +8,14 @@ resource "aws_lambda_function" "baiters_lambda_authorizer" {
   s3_key           = data.aws_s3_object.lambda_authorizer_code.key
   source_code_hash = data.aws_s3_object.lambda_authorizer_code.etag
 
+environment {
+    variables = {
+      COGNITO_USER_POOL_ID  = var.cognito_user_pool_id
+      COGNITO_APP_CLIENT_ID = var.cognito_machine_client_id
+      COGNITO_REGION        = "us-east-1"
+    }
+  }
+
   tags = {
     Application = "BaitersBurger"
   }
@@ -26,7 +34,7 @@ resource "aws_lambda_function" "baiters_lambda_user_password" {
   environment {
     variables = {
       COGNITO_USER_POOL_ID  = var.cognito_user_pool_id
-      COGNITO_APP_CLIENT_ID = var.cognito_client_id
+      COGNITO_APP_CLIENT_ID = var.cognito_login_client_id
       COGNITO_REGION        = "us-east-1"
     }
   }
