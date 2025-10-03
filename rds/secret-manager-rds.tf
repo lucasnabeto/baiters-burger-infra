@@ -4,7 +4,8 @@ resource "random_password" "rds" {
 }
 
 resource "aws_secretsmanager_secret" "rds_credentials" {
-  name = "rds-credentials"
+  name                    = "aws-rds-credentials"
+  recovery_window_in_days = 0
 }
 
 resource "aws_secretsmanager_secret_version" "rds_credentials_version" {
