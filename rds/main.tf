@@ -35,7 +35,7 @@ resource "aws_db_instance" "mysql" {
   publicly_accessible                 = true
   skip_final_snapshot                 = true
   iam_database_authentication_enabled = true
-  db_name                 = local.rds_secret.db_name
+  db_name                             = local.rds_secret.db_name
 
   depends_on = [
     aws_secretsmanager_secret_version.rds_credentials_version
