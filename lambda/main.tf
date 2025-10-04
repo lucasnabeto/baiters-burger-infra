@@ -10,9 +10,10 @@ resource "aws_lambda_function" "baiters_lambda_authorizer" {
 
   environment {
     variables = {
-      COGNITO_USER_POOL_ID  = var.cognito_user_pool_id
-      COGNITO_APP_CLIENT_ID = var.cognito_machine_client_id
-      COGNITO_REGION        = "us-east-1"
+      COGNITO_USER_POOL_ID          = var.cognito_user_pool_id
+      COGNITO_APP_CLIENT_ID_LOGIN   = var.cognito_login_client_id
+      COGNITO_APP_CLIENT_ID_MACHINE = var.cognito_machine_client_id
+      COGNITO_REGION                = "us-east-1"
     }
   }
 
