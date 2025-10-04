@@ -26,7 +26,3 @@ module "lambda" {
   cognito_login_client_id     = module.cognito.cognito_login_client_id
   cognito_login_client_secret = module.cognito.cognito_login_client_secret
 }
-
-module "rds" {
-  source = "./rds"
-}
