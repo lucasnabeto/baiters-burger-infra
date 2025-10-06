@@ -25,13 +25,13 @@ resource "aws_cognito_resource_server" "resource_server" {
   user_pool_id = aws_cognito_user_pool.user_pool_configuration.id
 
   scope {
-    scope_name        = "api.read"
-    scope_description = "Permission to read"
+    scope_name        = "totem"
+    scope_description = "Permission to totem operations"
   }
 
   scope {
-    scope_name        = "api.write"
-    scope_description = "Permission to write"
+    scope_name        = "funcionario"
+    scope_description = "Permission to admin operations"
   }
 }
 
@@ -43,8 +43,7 @@ resource "aws_cognito_user_pool_client" "machine_client" {
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["client_credentials"]
   allowed_oauth_scopes = [
-    "${aws_cognito_resource_server.resource_server.identifier}/api.read",
-    "${aws_cognito_resource_server.resource_server.identifier}/api.write",
+    "${aws_cognito_resource_server.resource_server.identifier}-totem",
   ]
 }
 
@@ -55,6 +54,9 @@ resource "aws_cognito_user_pool_client" "login_client" {
   generate_secret = true
 
   explicit_auth_flows          = ["ALLOW_ADMIN_USER_PASSWORD_AUTH"]
+  allowed_oauth_scopes = [
+    "${aws_cognito_resource_server.resource_server.identifier}-funcionario",
+  ]
   supported_identity_providers = ["COGNITO"]
 }
 
