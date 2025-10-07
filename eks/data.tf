@@ -14,7 +14,7 @@ data "aws_subnets" "filtered" {
   }
 
   filter {
-    name   = "availability-zone"
+    name = "availability-zone"
     values = [
       "${var.region}a",
       "${var.region}b",

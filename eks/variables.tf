@@ -5,7 +5,7 @@ variable "cluster_name" {
 
 variable "k8s_version" {
   type        = string
-  default     = "1.28"
+  default     = "1.31"
   description = "Versão do Kubernetes"
 }
 

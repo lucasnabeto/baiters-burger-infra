@@ -1,15 +1,14 @@
-#module "api-gateway" {
-#  source = "./api-gateway"
-#}
+module "cognito" {
+  source = "./cognito"
 
-#module "cognito" {
-#  source = "./cognito"
-#}
+  default_password      = "Cognito@123"
+  cognito_domain_prefix = "baitersburger-app"
+}
 
 module "eks" {
-  source             = "./eks"
+  source = "./eks"
+
   cluster_name       = "baitersburger-cluster"
-  k8s_version        = "1.28"
   node_instance_type = "t2.medium"
   desired_capacity   = 1
   min_size           = 1
@@ -18,10 +17,12 @@ module "eks" {
   region             = "us-east-1"
 }
 
-#module "lambda" {
-#  source = "./lambda"
-#}
+module "lambda" {
+  source     = "./lambda"
+  depends_on = [module.cognito]
 
-module "rds" {
-  source = "./rds"
+  cognito_user_pool_id        = module.cognito.cognito_user_pool_id
+  cognito_machine_client_id   = module.cognito.cognito_machine_client_id
+  cognito_login_client_id     = module.cognito.cognito_login_client_id
+  cognito_login_client_secret = module.cognito.cognito_login_client_secret
 }
