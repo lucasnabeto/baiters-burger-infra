@@ -43,7 +43,7 @@ resource "aws_cognito_user_pool_client" "machine_client" {
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["client_credentials"]
   allowed_oauth_scopes = [
-    "${aws_cognito_resource_server.resource_server.identifier}-totem",
+    "${aws_cognito_resource_server.resource_server.identifier}/totem",
   ]
 }
 
@@ -55,7 +55,7 @@ resource "aws_cognito_user_pool_client" "login_client" {
 
   explicit_auth_flows          = ["ALLOW_ADMIN_USER_PASSWORD_AUTH"]
   allowed_oauth_scopes = [
-    "${aws_cognito_resource_server.resource_server.identifier}-funcionario",
+    "${aws_cognito_resource_server.resource_server.identifier}/funcionario",
   ]
   supported_identity_providers = ["COGNITO"]
 }
